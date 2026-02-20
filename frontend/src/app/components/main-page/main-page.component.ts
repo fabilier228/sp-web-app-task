@@ -31,9 +31,13 @@ export class MainPageComponent implements OnInit {
         this.contacts.set(data);
         this.isLoading.set(false);
       },
-      error: () => {
-        this.errorMessage.set('Could not fetch contacts from the server.');
-        this.isLoading.set(false);
+      error: (err) => {
+        if (err.status === 404) {
+          this.contacts.set([]); 
+          this.errorMessage.set(null);
+        } else {
+          this.errorMessage.set('Could not fetch contacts from the server.');
+        }
       }
     });
   }
