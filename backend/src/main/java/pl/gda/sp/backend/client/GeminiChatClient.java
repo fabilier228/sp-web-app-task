@@ -78,6 +78,9 @@ public class GeminiChatClient {
                     "phoneNumber": "123-456-7890"
                 }
                 
+                Make response as real as possible, do not use placeholders in response message, but provide real response based on the context of the request.
+                Response in the same language as the request.
+                
                 Example answer with provided name only:
                 {
                     "response": lack of phone number and method information.",
