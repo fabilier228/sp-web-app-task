@@ -1,0 +1,63 @@
+<div class="phonebook-container">
+  <header>
+    <h1>Smart Phonebook</h1>
+    <p>Manage contacts using natural language, e.g., <em>"Add Thomas, number 555-444-333"</em></p>
+  </header>
+
+  <section class="prompt-section">
+    <input
+      type="text"
+      [ngModel]="promptText()"
+      (ngModelChange)="promptText.set($event)"
+      placeholder="Enter your command for AI..."
+      (keyup.enter)="submitPrompt()"
+      [disabled]="isLoading()"
+    />
+    <button (click)="submitPrompt()" [disabled]="isLoading() || !promptText().trim()">
+      @if (isLoading()) {
+        Processing...
+      } @else {
+        Execute
+      }
+    </button>
+  </section>
+
+  @if (aiMessage()) {
+    <div class="ai-message-banner">
+      <div class="ai-avatar">🤖</div>
+      <div class="ai-text">
+        <strong>AI Assistant</strong>
+        <p>{{ aiMessage() }}</p>
+      </div>
+    </div>
+  }
+
+  @if (errorMessage()) {
+    <div class="error-banner">
+      {{ errorMessage() }}
+    </div>
+  }
+
+  <section class="contacts-section">
+    <h2>Your Contacts</h2>
+    
+    <div class="contacts-grid">
+      @for (contact of contacts(); track contact.id) {
+        <div class="contact-card">
+          <div class="avatar">{{ contact.name.charAt(0).toUpperCase() }}</div>
+          <div class="info">
+            <div class="name">{{ contact.name }}</div>
+            <div class="phone">{{ contact.phoneNumber }}</div>
+          </div>
+        </div>
+      } @empty {
+        @if (!isLoading()) {
+          <div class="empty-state">
+            <p>Your phonebook is empty.</p>
+            <p>Write a prompt above to add someone!</p>
+          </div>
+        }
+      }
+    </div>
+  </section>
+</div>
