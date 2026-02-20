@@ -90,23 +90,6 @@ For production deployment, the following enhancements are planned:
 
 This approach will provide secure, multi-tenant contact management with personalized AI features.
 
-## Development
-
-### Backend Development
-
-```bash
-cd backend
-./mvnw spring-boot:run
-```
-
-### Frontend Development
-
-```bash
-cd frontend
-npm install
-npm start
-```
-
 ## License
 
 This project is provided as-is for internal use.
